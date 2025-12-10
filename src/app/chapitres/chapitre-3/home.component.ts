@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { interval } from 'rxjs';
+import { filter, interval, map, Observable, tap } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { ChapterTitleComponent } from '@ui-elements';
 
@@ -18,5 +18,13 @@ import { ChapterTitleComponent } from '@ui-elements';
   styles: ``
 })
 export class HomeComponent {
-  interval$ = interval(1000);
+  interval$: Observable<string> = interval(1000).pipe(
+    filter(value => value % 3 === 0),
+    map(value => value % 2 === 0 ? `${value} (pair)` : `${value} (impair)`),
+    tap(value => this.logger(value))
+  );
+
+  private logger(text: string): void{
+    console.log(`LOG: ${text}`);
+  }
 }
