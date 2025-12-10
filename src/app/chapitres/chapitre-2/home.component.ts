@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { ChapterTitleComponent, ConsoleTipComponent } from '@ui-elements';
-import { interval } from 'rxjs';
-import { AsyncPipe } from '@angular/common';
 import { CounterComponent } from './counter.component';
 
 @Component({
@@ -9,7 +7,6 @@ import { CounterComponent } from './counter.component';
   imports: [
     ConsoleTipComponent,
     ChapterTitleComponent,
-    AsyncPipe,
     CounterComponent
   ],
   template: `
