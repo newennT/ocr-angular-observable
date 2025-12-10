@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { interval, tap } from 'rxjs';
+import { interval, take, tap } from 'rxjs';
 import { ChapterTitleComponent, ConsoleTipComponent } from '@ui-elements';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-unsubscribe-strategies',
@@ -22,4 +23,12 @@ export class HomeComponent {
   constructor() {
     // this.interval$.subscribe();
   }
+
+  // stopAt$$ = this.interval$.pipe(
+  //   take(5)
+  // ).subscribe();
+
+  stopOnDestroy$ = this.interval$.pipe(
+    takeUntilDestroyed()
+  ).subscribe();
 }
